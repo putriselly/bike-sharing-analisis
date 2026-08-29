@@ -10,14 +10,11 @@ st.set_page_config(
 
 @st.cache_data
 def load_data():
-    day = pd.read_csv("day.csv")
-    hour = pd.read_csv("hour.csv")
-
+    day = pd.read_csv("data_main.csv")
     day["dteday"] = pd.to_datetime(day["dteday"])
-    hour["dteday"] = pd.to_datetime(hour["dteday"])
-    return day, hour
+    return day
 
-day_df, hour_df = load_data()
+day_df = load_data()
 
 weather_label = {1: "Cerah", 2: "Mendung/Berkabut", 3: "Hujan/Salju Ringan", 4: "Cuaca Ekstrem"}
 season_label = {1: "Semi", 2: "Panas", 3: "Gugur", 4: "Dingin"}
@@ -53,7 +50,7 @@ filtered_df = day_df[
     (day_df["dteday"] <= pd.to_datetime(date_range[1]))
 ]
 
-st.title("Dashboard Analisis Bike Sharing")
+st.title("🚲 Dashboard Analisis Bike Sharing")
 st.markdown("Dashboard ini menampilkan hasil analisis pengaruh cuaca dan musim terhadap jumlah penyewaan sepeda.")
 
 col1, col2, col3, col4 = st.columns(4)
@@ -124,7 +121,7 @@ with col_d:
         f"""
         - Musim dengan rata-rata penyewaan tertinggi: {top_season}.
         - Musim Semi memiliki rata-rata penyewaan terendah.
-        - Selisih rata-rata antara musim tertinggi dan terendah, menunjukkan pengaruh musim yang signifikan.
+        - Selisih rata-rata antara musim tertinggi dan terendah mencapai >50%, menunjukkan pengaruh musim yang signifikan.
         """
     )
 
@@ -156,7 +153,7 @@ st.pyplot(fig3)
 st.markdown(
     """
     Insight: Efek cuaca buruk konsisten menurunkan penyewaan di semua musim,
-    namun besarnya penurunan berbeda antar musim cuaca hujan pada musim panas
+    namun besarnya penurunan berbeda antar musim — cuaca hujan pada musim panas
     tampak menurunkan penyewaan lebih tajam dibanding cuaca hujan pada musim gugur.
     """
 )
