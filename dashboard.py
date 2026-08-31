@@ -6,12 +6,8 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Dashboard Bike Sharing",
-    page_icon="🚲",
     layout="wide"
 )
-
-st.write("DEBUG - Folder kerja saat ini:", os.getcwd())
-st.write("DEBUG - Isi folder ini:", os.listdir("."))
 
 @st.cache_data
 def load_data():
